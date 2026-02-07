@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Rose Day 🌹</title>
+
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#0b0f1a,#3a1747,#1e2a5a);
+      color:white;
+      overflow:hidden;
+    }
+
+    .box{
+      width:90%;
+      max-width:500px;
+      padding:25px;
+      border-radius:20px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,0.2);
+      text-align:center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+    }
+
+    p{
+      color: rgba(255,255,255,0.8);
+      font-size:16px;
+    }
+
+    input{
+      width:90%;
+      padding:12px;
+      margin-top:10px;
+      border-radius:12px;
+      border:none;
+      outline:none;
+      font-size:16px;
+    }
+
+    button{
+      margin-top:15px;
+      padding:12px 18px;
+      border:none;
+      border-radius:30px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .btn1{
+      background: linear-gradient(180deg,#ff8fb1,#ff3b6e);
+      color:white;
+    }
+
+    .btn2{
+      background: rgba(255,255,255,0.15);
+      color:white;
+      border:1px solid rgba(255,255,255,0.3);
+    }
+
+    .yes{
+      background: linear-gradient(180deg,#64f0c6,#38d39f);
+      color:#062015;
+    }
+
+    .no{
+      background: rgba(255,255,255,0.15);
+      color:white;
+      border:1px solid rgba(255,255,255,0.3);
+      position:relative;
+    }
+
+    .rose{
+      font-size:70px;
+      margin:15px 0;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-12px);}
+      100%{transform:translateY(0px);}
+    }
+
+    .hidden{
+      display:none;
+    }
+
+    .note{
+      margin-top:15px;
+      font-size:15px;
+      color: rgba(255,255,255,0.85);
+      line-height:1.4;
+    }
+
+    .warn{
+      color:#ff8fb1;
+      font-size:14px;
+      margin-top:8px;
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <!-- Screen 1 -->
+    <div id="screen1">
+      <h1>Wait ✋💗</h1>
+      <p>Write your name first 😌</p>
+
+      <input type="text" id="name" placeholder="Enter your name..." />
+      <div class="warn" id="warn">Please enter your name first!</div>
+
+      <br>
+      <button class="btn1" onclick="goNext()">Continue</button>
+    </div>
+
+
+    <!-- Screen 2 -->
+    <div id="screen2" class="hidden">
+      <h1 id="helloText">Hey ❤️</h1>
+      <p>Do you accept my rose? 🌹</p>
+
+      <div class="rose">🌹</div>
+
+      <button class="yes" onclick="acceptRose()">YES ❤️</button>
+      <button class="no" id="noBtn" onclick="rejectRose()">NO</button>
+
+      <p style="margin-top:12px; font-size:13px; opacity:0.7;">
+        (Try pressing NO 😭)
+      </p>
+    </div>
+
+
+    <!-- Screen 3 -->
+    <div id="screen3" class="hidden">
+      <h1>Happy Rose Day 🌹❤️</h1>
+      <h2 id="finalName"></h2>
+
+      <div class="rose">🌹</div>
+
+      <p class="note">
+        You are the most beautiful part of my life.<br>
+        Just like this rose, my love for you grows every day.<br>
+        Thank you for being mine 💗✨
+      </p>
+
+      <button class="btn1" onclick="restart()">Play Again ✨</button>
+    </div>
+
+  </div>
+
+  <script>
+    let noSize = 1;
+
+    function goNext(){
+      let n = document.getElementById("name").value.trim();
+
+      if(n === ""){
+        document.getElementById("warn").style.display = "block";
+        return;
+      }
+
+      document.getElementById("warn").style.display = "none";
+
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+
+      document.getElementById("helloText").innerText = "Hey " + n + " 💗";
+    }
+
+    function rejectRose(){
+      noSize += 0.4;
+      let noBtn = document.getElementById("noBtn");
+      noBtn.style.transform = "scale(" + noSize + ")";
+
+      // move randomly
+      let x = Math.floor(Math.random() * 150) - 70;
+      let y = Math.floor(Math.random() * 120) - 60;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    function acceptRose(){
+      let n = document.getElementById("name").value.trim();
+
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen3").classList.remove("hidden");
+
+      document.getElementById("finalName").innerText = "Hey " + n + " 💖";
+    }
+
+    function restart(){
+      location.reload();
+    }
+  </script>
+
+</body>
+</html>

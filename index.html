@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Propose Day 💍❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1a0033, #4b004b, #000033);
+      height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .box {
+      width: 90%;
+      max-width: 380px;
+      padding: 25px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 5;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 10px 0;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 15px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 90%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff2d75, #ff6aa2);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btnYes {
+      background: linear-gradient(45deg, #00ff7f, #00c853);
+      color: black;
+      padding: 14px 30px;
+    }
+
+    .btnNo {
+      background: linear-gradient(45deg, #ff1744, #ff5252);
+      color: white;
+      padding: 14px 30px;
+      position: relative;
+    }
+
+    /* Hearts Falling */
+    .heart {
+      position: absolute;
+      top: -50px;
+      font-size: 20px;
+      animation: fall linear forwards;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Music Cards */
+    .musicCard {
+      background: rgba(255,255,255,0.10);
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .musicCard h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .musicCard p {
+      margin: 5px 0;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .playBtn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Game */
+    #gameArea {
+      margin-top: 20px;
+      width: 100%;
+      height: 280px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      touch-action: none;
+    }
+
+    #catcher {
+      position: absolute;
+      bottom: 10px;
+      left: 40%;
+      width: 70px;
+      height: 40px;
+      background: rgba(255,255,255,0.20);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      user-select: none;
+    }
+
+    .fallingHeart {
+      position: absolute;
+      top: 0;
+      font-size: 26px;
+    }
+
+    .scoreBox {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: confettiFall linear forwards;
+      z-index: 1000;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="heeriye.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Screen 1 -->
+  <div class="box" id="screen1">
+    <h1>Happy Propose Day 💍❤️</h1>
+    <p>Loading something special for you... 💗</p>
+    <button class="btn" onclick="goNext()">Start ✨</button>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="box hidden" id="screen2">
+    <h1>Hey Tulyiaaa 💕</h1>
+    <p>
+      Today is Propose Day...  
+      and I just want to say one thing 💗  
+      You are the best thing that ever happened to me 🥺✨
+    </p>
+
+    <h2>Will you accept my proposal? 💍🥺</h2>
+
+    <div class="buttons">
+      <button class="btnYes" onclick="acceptProposal()">Yes 💖</button>
+      <button class="btnNo" id="noBtn" onclick="rejectProposal()">No 😭</button>
+    </div>
+  </div>
+
+  <!-- Screen 3 -->
+  <div class="box hidden" id="screen3">
+    <h1>YAYYYYY 😭💖</h1>
+    <p>
+      I swear you just made my whole life complete 😭💍  
+      I love you more than anything 🥺❤️
+    </p>
+
+    <h2>Some Music For You 🎶</h2>
+
+    <div class="musicCard">
+      <h3>Heeriye ❤️</h3>
+      <p>Because you are my forever comfort 💕</p>
+      <button class="playBtn" onclick="playSong(1)">Play 🎧</button>
+    </div>
+
+    <div class="musicCard">
+      <h3>Kesariya 💛</h3>
+      <p>Because you shine in my life like sunshine ✨</p>
+      <button class="playBtn" onclick="playSong(2)">Play 🎧</button>
+    </div>
+
+    <div class="musicCard">
+      <h3>Apna Bana Le 💖</h3>
+      <p>Because I want you forever 🥺💍</p>
+      <button class="playBtn" onclick="playSong(3)">Play 🎧</button>
+    </div>
+
+    <button class="btn" onclick="goGame()">Next ➝ Game 💕</button>
+  </div>
+
+  <!-- Screen 4 -->
+  <div class="box hidden" id="screen4">
+    <h1>Catch The Hearts 💕</h1>
+    <p>Move the catcher and grab the hearts. Miss 3 times and it ends 😭</p>
+
+    <div class="scoreBox">
+      <div>Caught: <span id="caught">0</span></div>
+      <div>Missed: <span id="missed">0</span>/3</div>
+      <div>Goal: <span id="goal">0</span>/12</div>
+    </div>
+
+    <div id="gameArea">
+      <div id="catcher">💝</div>
+    </div>
+
+    <p id="gameMessage"></p>
+  </div>
+
+<script>
+  let noCount = 0;
+
+  function goNext() {
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+
+    document.getElementById("bgMusic").play().catch(()=>{});
+  }
+
+  function rejectProposal() {
+    noCount++;
+    let noBtn = document.getElementById("noBtn");
+
+    if (noCount == 1) {
+      alert("Awww no? 🥺💔 Think again...");
+      noBtn.style.transform = "scale(0.8)";
+    }
+    else if (noCount == 2) {
+      alert("Pls yaar 😭💗");
+      noBtn.style.transform = "scale(0.6)";
+    }
+    else {
+      alert("Okay... you broke my heart 💔😭");
+      noBtn.style.display = "none";
+    }
+
+    moveNoBtn();
+  }
+
+  function moveNoBtn() {
+    let noBtn = document.getElementById("noBtn");
+    let x = Math.random() * 200 - 100;
+    let y = Math.random() * 150 - 70;
+
+    noBtn.style.position = "relative";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  function acceptProposal() {
+    document.getElementById("screen2").classList.add("hidden");
+    document.getElementById("screen3").classList.remove("hidden");
+    startConfetti();
+  }
+
+  // MUSIC SYSTEM
+  let song1 = new Audio("heeriye.mp3");
+  let song2 = new Audio("kesariya.mp3");
+  let song3 = new Audio("apnabanale.mp3");
+
+  function stopAll() {
+    song1.pause(); song1.currentTime = 0;
+    song2.pause(); song2.currentTime = 0;
+    song3.pause(); song3.currentTime = 0;
+  }
+
+  function playSong(n) {
+    stopAll();
+    if (n == 1) song1.play();
+    if (n == 2) song2.play();
+    if (n == 3) song3.play();
+  }
+
+  function goGame() {
+    document.getElementById("screen3").classList.add("hidden");
+    document.getElementById("screen4").classList.remove("hidden");
+    startGame();
+  }
+
+  // GAME
+  let caught = 0;
+  let missed = 0;
+  let goal = 12;
+  let gameInterval;
+  let gameOver = false;
+
+  function startGame() {
+    caught = 0;
+    missed = 0;
+    gameOver = false;
+
+    document.getElementById("caught").innerText = caught;
+    document.getElementById("missed").innerText = missed;
+    document.getElementById("goal").innerText = caught;
+
+    let gameArea = document.getElementById("gameArea");
+    let catcher = document.getElementById("catcher");
+
+    // Touch drag catcher
+    gameArea.addEventListener("touchmove", function(e) {
+      let touch = e.touches[0];
+      let rect = gameArea.getBoundingClientRect();
+      let x = touch.clientX - rect.left - catcher.offsetWidth / 2;
+
+      if (x < 0) x = 0;
+      if (x > gameArea.offsetWidth - catcher.offsetWidth) x = gameArea.offsetWidth - catcher.offsetWidth;
+
+      catcher.style.left = x + "px";
+    });
+
+    // Spawn hearts
+    gameInterval = setInterval(() => {
+      if (gameOver) return;
+      spawnHeart();
+    }, 900);
+  }
+
+  function spawnHeart() {
+    let gameArea = document.getElementById("gameArea");
+    let catcher = document.getElementById("catcher");
+
+    let heart = document.createElement("div");
+    heart.classList.add("fallingHeart");
+    heart.innerText = "💖";
+
+    let x = Math.random() * (gameArea.offsetWidth - 30);
+    heart.style.left = x + "px";
+    heart.style.top = "0px";
+
+    gameArea.appendChild(heart);
+
+    let fall = setInterval(() => {
+      if (gameOver) {
+        clearInterval(fall);
+        heart.remove();
+        return;
+      }
+
+      let top = parseInt(heart.style.top);
+      heart.style.top = (top + 5) + "px";
+
+      let heartRect = heart.getBoundingClientRect();
+      let catcherRect = catcher.getBoundingClientRect();
+
+      // caught
+      if (
+        heartRect.bottom >= catcherRect.top &&
+        heartRect.left < catcherRect.right &&
+        heartRect.right > catcherRect.left
+      ) {
+        caught++;
+        document.getElementById("caught").innerText = caught;
+        document.getElementById("goal").innerText = caught;
+
+        clearInterval(fall);
+        heart.remove();
+
+        if (caught >= goal) {
+          winGame();
+        }
+      }
+
+      // missed
+      if (top > gameArea.offsetHeight) {
+        missed++;
+        document.getElementById("missed").innerText = missed;
+
+        clearInterval(fall);
+        heart.remove();
+
+        if (missed >= 3) {
+          loseGame();
+        }
+      }
+    }, 30);
+  }
+
+  function winGame() {
+    gameOver = true;
+    clearInterval(gameInterval);
+    document.getElementById("gameMessage").innerHTML =
+      "You did it 😭💖 You caught all 12 hearts! <br> I LOVE YOU FOREVER 💍❤️";
+    startConfetti();
+  }
+
+  function loseGame() {
+    gameOver = true;
+    clearInterval(gameInterval);
+    document.getElementById("gameMessage").innerHTML =
+      "Awww 😭💔 You missed 3 times... <br> But I still love you endlessly 💕";
+  }
+
+  // Falling background hearts
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }, 300);
+
+  // Confetti
+  function startConfetti() {
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement("div");
+      c.classList.add("confetti");
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      c.style.animationDuration = (2 + Math.random() * 2) + "s";
+      document.body.appendChild(c);
+
+      setTimeout(() => c.remove(), 4000);
+    }
+  }
+</script>
+
+</body>
+</html>

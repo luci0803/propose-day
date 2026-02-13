@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nobita ❤️ Shizuka - Our Love Album</title>
-
-    <!-- Google Fonts -->
+    <title>Arbaaz ❤️ Tulya - Our Love Album</title>
+    
+    <!-- Google Fonts for Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -42,7 +42,29 @@
             color: var(--primary);
         }
 
-        /* Floating Hearts Background */
+        /* BACK BUTTON */
+        .back-btn{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 30px;
+            background: #ff4d6d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 5px 15px rgba(255,77,109,0.4);
+            transition: 0.3s;
+        }
+
+        .back-btn:hover{
+            transform: scale(1.05);
+            background: #ff2a55;
+        }
+
+        /* Background Floating Hearts */
         .heart-bg {
             position: fixed;
             top: 0;
@@ -98,6 +120,7 @@
         #hero h1 {
             font-size: 3.5rem;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         #hero h2 {
@@ -181,8 +204,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
-            backface-visibility: hidden; /* ✅ FIX */
         }
 
         .page img {
@@ -204,7 +225,6 @@
         .page.flipped {
             transform: rotateY(-180deg);
             pointer-events: none;
-            z-index: 0; /* ✅ FIX */
         }
 
         .instruction {
@@ -212,13 +232,6 @@
             font-size: 0.9rem;
             color: #888;
             opacity: 0.8;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
         }
 
         /* MESSAGE SECTION */
@@ -233,10 +246,6 @@
             background: rgba(255, 255, 255, 0.4);
             position: relative;
             z-index: 2;
-        }
-
-        .message-box {
-            max-width: 600px;
         }
 
         .typewriter {
@@ -260,8 +269,7 @@
         /* PROPOSAL SECTION */
         #proposal-section {
             min-height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-            url('https://iili.io/qHMKgF2.md.jpg');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://iili.io/q98BXLX.md.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -277,7 +285,6 @@
         #proposal-section h2 {
             font-size: 3rem;
             color: #fff;
-            text-shadow: 0 0 10px var(--primary);
             margin-bottom: 40px;
         }
 
@@ -295,7 +302,6 @@
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
         }
 
         .btn-1 {
@@ -306,10 +312,6 @@
         .btn-2 {
             background: white;
             color: var(--primary);
-        }
-
-        .yes-btn:active {
-            transform: scale(0.9);
         }
 
         /* MODAL */
@@ -331,44 +333,34 @@
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            animation: popIn 0.5s;
             max-width: 90%;
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 480px) {
-            #hero h1 { font-size: 2.8rem; }
-            #hero h2 { font-size: 2rem; }
-            .album-container { width: 280px; height: 380px; }
-            #proposal-section h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Background Music -->
+    <!-- BACK BUTTON -->
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+    <!-- Background Audio -->
     <audio id="bg-music" loop>
         <source src="https://medias.volfthemes.com/audio/romantic-piano.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Floating Hearts -->
+    <!-- Floating Hearts Background -->
     <div class="heart-bg" id="heart-container"></div>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section id="hero">
         <div class="hero-card">
             <h1>Happy Valentine’s Day</h1>
-            <h2>Nobita ❤️ Shizuka</h2>
+            <h2>Arbaaz ❤️ Tulya</h2>
             <button class="cta-btn" onclick="startExperience()">Open Our Love Album 💌</button>
         </div>
     </section>
 
-    <!-- ALBUM -->
+    <!-- ALBUM SECTION -->
     <section id="album-section">
         <h2>Our Beautiful Memories</h2>
         <div class="album-container">
@@ -377,15 +369,13 @@
         <p class="instruction">Tap the photo to turn the page 👆</p>
     </section>
 
-    <!-- MESSAGE -->
+    <!-- LOVE MESSAGE SECTION -->
     <section id="message-section">
-        <div class="message-box">
-            <h2 style="margin-bottom: 20px;">A Note for You</h2>
-            <p id="typewriter-text" class="typewriter"><span id="cursor" class="cursor">|</span></p>
-        </div>
+        <h2 style="margin-bottom: 20px;">A Note for You</h2>
+        <p id="typewriter-text" class="typewriter"><span id="cursor" class="cursor">|</span></p>
     </section>
 
-    <!-- PROPOSAL -->
+    <!-- FINAL PROPOSAL SECTION -->
     <section id="proposal-section">
         <h2>Will You Stay With Me Forever?</h2>
         <div class="proposal-btns">
@@ -394,7 +384,7 @@
         </div>
     </section>
 
-    <!-- MODAL -->
+    <!-- POPUP MODAL -->
     <div id="success-modal">
         <div class="modal-content">
             <h1 style="color: var(--primary);">I Love You! ❤️</h1>
@@ -405,9 +395,30 @@
     </div>
 
     <script>
-        /* ================================
-           PHOTO LINKS (YOUR PICS)
-        ================================= */
+        // BACK BUTTON FUNCTION
+        function goBack(){
+            window.location.href = "index.html";
+        }
+
+        // Floating hearts
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const heartCount = 15;
+            for(let i=0; i<heartCount; i++){
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.width = (Math.random() * 20 + 10) + 'px';
+                heart.style.height = heart.style.width;
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.backgroundColor = Math.random() > 0.5 ? '#ff4d6d' : '#ff8fa3';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Images and captions
         const images = [
             "https://iili.io/qHMKjyX.md.jpg",
             "https://iili.io/qHMKNun.md.jpg",
@@ -422,42 +433,18 @@
         ];
 
         const captions = [
-            "Our First Memory ❤️",
-            "Your Smile is My World ✨",
-            "A Moment I’ll Never Forget 💕",
-            "Together Forever 🌹",
-            "My Favorite Person 😍",
-            "My Heart Belongs To You 💓",
-            "Every Day With You is Special 🌸",
-            "Love Like This is Rare 💖",
-            "My Happiness is You 💑",
+            "Our first memories ❤️",
+            "My favorite smile ✨",
+            "You make my heart happy 💖",
+            "Forever my safe place 🏡",
+            "Best moments together 😍",
+            "Every day with you is special 💑",
+            "My sunshine 🌞",
+            "Cutest couple 😘",
+            "You are my everything 💞",
             "Forever & Always 💍"
         ];
 
-        /* ================================
-           BACKGROUND HEARTS
-        ================================= */
-        function createHearts() {
-            const container = document.getElementById('heart-container');
-            const heartCount = 18;
-
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('floating-heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.width = (Math.random() * 20 + 10) + 'px';
-                heart.style.height = heart.style.width;
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
-                heart.style.backgroundColor = Math.random() > 0.5 ? '#ff4d6d' : '#ff8fa3';
-                container.appendChild(heart);
-            }
-        }
-        createHearts();
-
-        /* ================================
-           BOOK INIT
-        ================================= */
         const book = document.getElementById('book');
         let currentPage = 0;
         const totalPages = images.length;
@@ -479,28 +466,18 @@
         }
         initBook();
 
-        /* ================================
-           PAGE FLIP (FIXED)
-        ================================= */
         function flipPage() {
             if (currentPage < totalPages) {
                 const page = document.getElementById(`page-${currentPage}`);
                 page.classList.add('flipped');
-                page.style.zIndex = currentPage; 
                 currentPage++;
             } else {
                 const pages = document.querySelectorAll('.page');
-                pages.forEach((p, index) => {
-                    p.classList.remove('flipped');
-                    p.style.zIndex = totalPages - index;
-                });
+                pages.forEach(p => p.classList.remove('flipped'));
                 currentPage = 0;
             }
         }
 
-        /* ================================
-           START EXPERIENCE
-        ================================= */
         function startExperience() {
             const music = document.getElementById('bg-music');
             music.volume = 0.5;
@@ -509,12 +486,8 @@
             document.getElementById('album-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* ================================
-           TYPEWRITER EFFECT
-        ================================= */
-        const textToType =
-            "Every moment with you feels magical. You are my favorite person, my peace, my happiness, and my forever. I love you more than words can ever explain. ❤️";
-
+        // Typewriter
+        const textToType = "Every moment with you is my favorite memory. You are my greatest adventure and my happiest home. I love you more than words can say.";
         const typeWriterElement = document.getElementById('typewriter-text');
         const cursor = document.getElementById('cursor');
         let charIndex = 0;
@@ -541,9 +514,7 @@
 
         observer.observe(document.getElementById('message-section'));
 
-        /* ================================
-           PROPOSAL MODAL + CONFETTI
-        ================================= */
+        // Proposal modal + confetti
         function sayYes() {
             const modal = document.getElementById('success-modal');
             modal.style.display = 'flex';
@@ -552,8 +523,7 @@
 
         function createConfetti() {
             const colors = ['#ff4d6d', '#ff8fa3', '#fff', '#ffd700'];
-
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -566,7 +536,6 @@
                 document.body.appendChild(confetti);
 
                 const duration = Math.random() * 3 + 2;
-
                 confetti.animate([
                     { transform: `translate3d(0,0,0)`, opacity: 1 },
                     { transform: `translate3d(${Math.random()*100 - 50}px, 100vh, 0)`, opacity: 0 }

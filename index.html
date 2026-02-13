@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nobita ❤️ Shizuka - Our Love Album</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff8fa3;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
+            --text-main: #590d22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary);
+        }
+
+        /* Floating Hearts Background */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -10vh;
+            background-color: var(--secondary);
+            opacity: 0.6;
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* HERO SECTION */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .hero-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            max-width: 90%;
+            animation: fadeIn 1.5s ease;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        #hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-main);
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            background: #ff2a55;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 77, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ALBUM SECTION */
+        #album-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+
+        .album-container {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            perspective: 1500px;
+            margin: 20px auto;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            overflow: hidden;
+            border: 1px solid #ffe5ec;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            backface-visibility: hidden; /* ✅ FIX */
+        }
+
+        .page img {
+            width: 90%;
+            height: 75%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .page-caption {
+            margin-top: 15px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+            pointer-events: none;
+            z-index: 0; /* ✅ FIX */
+        }
+
+        .instruction {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* MESSAGE SECTION */
+        #message-section {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-box {
+            max-width: 600px;
+        }
+
+        .typewriter {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            min-height: 100px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--primary);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* PROPOSAL SECTION */
+        #proposal-section {
+            min-height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('https://iili.io/qHMKgF2.md.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        #proposal-section h2 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .proposal-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .yes-btn {
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-1 {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-2 {
+            background: white;
+            color: var(--primary);
+        }
+
+        .yes-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* MODAL */
+        #success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: popIn 0.5s;
+            max-width: 90%;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 { font-size: 2.8rem; }
+            #hero h2 { font-size: 2rem; }
+            .album-container { width: 280px; height: 380px; }
+            #proposal-section h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="https://medias.volfthemes.com/audio/romantic-piano.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Floating Hearts -->
+    <div class="heart-bg" id="heart-container"></div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-card">
+            <h1>Happy Valentine’s Day</h1>
+            <h2>Nobita ❤️ Shizuka</h2>
+            <button class="cta-btn" onclick="startExperience()">Open Our Love Album 💌</button>
+        </div>
+    </section>
+
+    <!-- ALBUM -->
+    <section id="album-section">
+        <h2>Our Beautiful Memories</h2>
+        <div class="album-container">
+            <div class="book" id="book" onclick="flipPage()"></div>
+        </div>
+        <p class="instruction">Tap the photo to turn the page 👆</p>
+    </section>
+
+    <!-- MESSAGE -->
+    <section id="message-section">
+        <div class="message-box">
+            <h2 style="margin-bottom: 20px;">A Note for You</h2>
+            <p id="typewriter-text" class="typewriter"><span id="cursor" class="cursor">|</span></p>
+        </div>
+    </section>
+
+    <!-- PROPOSAL -->
+    <section id="proposal-section">
+        <h2>Will You Stay With Me Forever?</h2>
+        <div class="proposal-btns">
+            <button class="yes-btn btn-1" onclick="sayYes()">Yes ❤️</button>
+            <button class="yes-btn btn-2" onclick="sayYes()">Forever Yes 😍</button>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="success-modal">
+        <div class="modal-content">
+            <h1 style="color: var(--primary);">I Love You! ❤️</h1>
+            <p>You Just Made Me The Happiest Person Alive!</p>
+            <br>
+            <p style="font-size: 3rem;">💑</p>
+        </div>
+    </div>
+
+    <script>
+        /* ================================
+           PHOTO LINKS (YOUR PICS)
+        ================================= */
+        const images = [
+            "https://iili.io/qHMKjyX.md.jpg",
+            "https://iili.io/qHMKNun.md.jpg",
+            "https://iili.io/qHMKXaI.md.jpg",
+            "https://iili.io/qHMKhvt.md.jpg",
+            "https://iili.io/qHMKOjs.md.jpg",
+            "https://iili.io/qHMKvnf.md.jpg",
+            "https://iili.io/qHMK8G4.md.jpg",
+            "https://iili.io/qHMKraS.md.jpg",
+            "https://iili.io/qHMKS6l.md.jpg",
+            "https://iili.io/qHMKgF2.md.jpg"
+        ];
+
+        const captions = [
+            "Our First Memory ❤️",
+            "Your Smile is My World ✨",
+            "A Moment I’ll Never Forget 💕",
+            "Together Forever 🌹",
+            "My Favorite Person 😍",
+            "My Heart Belongs To You 💓",
+            "Every Day With You is Special 🌸",
+            "Love Like This is Rare 💖",
+            "My Happiness is You 💑",
+            "Forever & Always 💍"
+        ];
+
+        /* ================================
+           BACKGROUND HEARTS
+        ================================= */
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const heartCount = 18;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.width = (Math.random() * 20 + 10) + 'px';
+                heart.style.height = heart.style.width;
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.backgroundColor = Math.random() > 0.5 ? '#ff4d6d' : '#ff8fa3';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        /* ================================
+           BOOK INIT
+        ================================= */
+        const book = document.getElementById('book');
+        let currentPage = 0;
+        const totalPages = images.length;
+
+        function initBook() {
+            book.innerHTML = '';
+            images.forEach((img, index) => {
+                const page = document.createElement('div');
+                page.classList.add('page');
+                page.style.zIndex = totalPages - index;
+                page.id = `page-${index}`;
+
+                page.innerHTML = `
+                    <img src="${img}" alt="Memory ${index + 1}" draggable="false">
+                    <div class="page-caption">${captions[index]}</div>
+                `;
+                book.appendChild(page);
+            });
+        }
+        initBook();
+
+        /* ================================
+           PAGE FLIP (FIXED)
+        ================================= */
+        function flipPage() {
+            if (currentPage < totalPages) {
+                const page = document.getElementById(`page-${currentPage}`);
+                page.classList.add('flipped');
+                page.style.zIndex = currentPage; 
+                currentPage++;
+            } else {
+                const pages = document.querySelectorAll('.page');
+                pages.forEach((p, index) => {
+                    p.classList.remove('flipped');
+                    p.style.zIndex = totalPages - index;
+                });
+                currentPage = 0;
+            }
+        }
+
+        /* ================================
+           START EXPERIENCE
+        ================================= */
+        function startExperience() {
+            const music = document.getElementById('bg-music');
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Autoplay blocked"));
+
+            document.getElementById('album-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ================================
+           TYPEWRITER EFFECT
+        ================================= */
+        const textToType =
+            "Every moment with you feels magical. You are my favorite person, my peace, my happiness, and my forever. I love you more than words can ever explain. ❤️";
+
+        const typeWriterElement = document.getElementById('typewriter-text');
+        const cursor = document.getElementById('cursor');
+        let charIndex = 0;
+        let startedTyping = false;
+
+        function typeText() {
+            if (charIndex < textToType.length) {
+                const span = document.createElement('span');
+                span.textContent = textToType.charAt(charIndex);
+                typeWriterElement.insertBefore(span, cursor);
+                charIndex++;
+                setTimeout(typeText, 50);
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !startedTyping) {
+                    startedTyping = true;
+                    typeText();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('message-section'));
+
+        /* ================================
+           PROPOSAL MODAL + CONFETTI
+        ================================= */
+        function sayYes() {
+            const modal = document.getElementById('success-modal');
+            modal.style.display = 'flex';
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#ff8fa3', '#fff', '#ffd700'];
+
+            for (let i = 0; i < 120; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10vh';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.zIndex = '2000';
+                confetti.style.borderRadius = '50%';
+                document.body.appendChild(confetti);
+
+                const duration = Math.random() * 3 + 2;
+
+                confetti.animate([
+                    { transform: `translate3d(0,0,0)`, opacity: 1 },
+                    { transform: `translate3d(${Math.random()*100 - 50}px, 100vh, 0)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'linear',
+                    fill: 'forwards'
+                });
+
+                setTimeout(() => confetti.remove(), duration * 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>
